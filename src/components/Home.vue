@@ -9,8 +9,8 @@
       <div v-else class="categories">
         <router-link 
           v-for="category in enabledCategories" 
-          :key="category.slug"
-          :to="{ name: 'CategoryArticles', params: { slug: category.id , title: category.title } }"
+          :key="category.id"
+          :to="{ name: 'CategoryArticles', params: { slug: category.id , title: category.title , svgIcon: category.icon } }"
           class="category"
         >
           <icon :name="category.icon"></icon>
