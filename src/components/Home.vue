@@ -1,19 +1,21 @@
 
 
 <template>
-  <div>
+  <div class="home">
     <div class="knowledge-base">
       <div v-if="loading" class="loading">Loading categories...</div>
-      <div v-else-if="error" class="error"></div>
+      <div v-else-if="error" class="error">{{ error }}</div>
       <div v-else class="categories">
         <router-link 
-
+          v-for="category in enabledCategories" 
+          :key="category.slug"
+          :to="{ name: 'CategoryArticles', params: { slug: category.id , title: category.title } }"
           class="category"
         >
            <icon name="link"></icon>
-          <p class="category-title"></p>
-          <p class="category-article">articles</p>
-          <p class="category-update">Last update</p>
+          <p class="category-title">{{ category.title }}</p>
+          <p class="category-article">{{ category.totalArticle }} articles</p>
+          <p class="category-update">Last update {{ timeAgo(category.updatedOn) }}</p>
         </router-link>
       </div>
     </div>
@@ -22,7 +24,50 @@
 </template>
 
 <script>
+import axios from 'axios'
 
+export default {
+  name: 'Home',
+
+  data() {
+    return {
+      searchQuery: '',
+      categories: [],
+      loading: true,
+      error: null,
+    }
+  },
+
+  mixins: [apiMixin],
+  
+  computed: {
+    enabledCategories() {
+      return this.categories
+        .filter(category => category.enabled)
+        .sort((a, b) => a.order - b.order)
+    }
+  },
+
+  async created() {
+    await this.fetchCategories()
+  },
+
+  methods: {
+    
+    async fetchCategories() {
+      try {
+        const response = await axios.get('/api/categories')
+        this.categories = response.data
+        this.loading = false
+      } catch (error) {
+        console.error('Error fetching categories:', error)
+        this.error = 'Failed to load categories. Please try again later.'
+        this.loading = false
+      }
+    },
+
+  }
+}
 </script>
 
 <style lang="scss" scoped>
