@@ -13,7 +13,7 @@
           :to="{ name: 'CategoryArticles', params: { slug: category.id , title: category.title } }"
           class="category"
         >
-           <icon name="link"></icon>
+          <icon :name="category.icon"></icon>
           <p class="category-title">{{ category.title }}</p>
           <p class="category-article">{{ category.totalArticle }} articles</p>
           <p class="category-update">Last update {{ timeConverter(category.updatedOn) }}</p>
@@ -120,9 +120,9 @@ export default {
     grid-template-columns: repeat(auto-fit, minmax(315px, 1fr));
     gap: 20px;
     margin-top: 40px;
+    padding: 20px;
 
     .category {
-      width: 315px;
       height: 180px;
       background-color: $background-color;
       padding: 20px;
