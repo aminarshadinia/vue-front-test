@@ -2,6 +2,7 @@
 
 <template>
   <div class="home">
+    <SearchContainer @search="handleSearch" />
     <div class="knowledge-base">
       <div v-if="loading" class="loading">Loading categories...</div>
       <div v-else-if="error" class="error">{{ error }}</div>
@@ -24,10 +25,17 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from 'axios';
+import icon from './Icon.vue';
+import SearchContainer from './SearchContainer.vue';
 
 export default {
   name: 'Home',
+
+  components: {
+    SearchContainer: () => import('./SearchContainer.vue'),
+  icon,
+  },
 
   data() {
     return {
@@ -62,6 +70,11 @@ export default {
         this.error = 'Failed to load categories. Please try again later.'
         this.loading = false
       }
+    },
+
+    handleSearch(query) {
+      // Implement search functionality here
+      console.log('Searching for:', query)
     },
 
 // We also could use MOMENT package.
