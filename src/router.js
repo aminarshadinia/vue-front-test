@@ -1,4 +1,4 @@
-import KnowledgeBase from "./components/KnowledgeBase.vue";
+import Home from "./components/Home.vue";
 import CategoryArticles from "./components/CategoryArticles.vue";
 import VueRouter from 'vue-router'
 
@@ -6,7 +6,7 @@ export const routes = [
   {
     path: '/',
     name: 'Home',
-    component: KnowledgeBase
+    component: Home
   },
   {
     path: '/category/:slug',
