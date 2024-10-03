@@ -8,6 +8,17 @@ export const routes = [
     name: 'Home',
     component: KnowledgeBase
   },
+  {
+    path: '/category/:slug',
+    name: 'CategoryArticles',
+    component: CategoryArticles,
+    props: true
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: '404',
+    // component: () => import('./Views/404.vue')
+  },
 ]
 
 export const router = new VueRouter({
