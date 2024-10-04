@@ -10,7 +10,7 @@
         <router-link 
           v-for="category in enabledCategories" 
           :key="category.id"
-          :to="{ name: 'CategoryArticles', params: { slug: category.id , title: category.title , svgIcon: category.icon } }"
+          :to="{ name: 'CategoryArticles', params: { slug: category.id , title: category.title , svgIcon: category.icon , catUpdatedOn: timeConverter(category.updatedOn) } }"
           class="category"
         >
           <icon :name="category.icon"></icon>
@@ -47,6 +47,7 @@ export default {
   },
 
   computed: {
+    // Enabled categories Based on Order Number
     enabledCategories() {
       return this.categories
         .filter(category => category.enabled)
