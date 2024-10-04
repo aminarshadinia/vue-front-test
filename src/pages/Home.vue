@@ -31,48 +31,42 @@
 
 <script>
 import icon from '../components/widgets/Icon.vue';
-import { TimeConverterMixin } from '../utilities/TimeConverterMixin';
-import { fetchCategoriesMixin } from '../services/fetchCategoriesMixin';
+import { timeConverterMixin } from '../utilities/timeConverterMixin';
 
 export default {
   name: 'Home',
 
-  mixins: [TimeConverterMixin , fetchCategoriesMixin],
+  mixins: [timeConverterMixin],
 
   components: {
     SearchContainer: () => import('../components/layout/SearchContainer.vue'),
-  icon,
-  },
-
-  data() {
-    return {
-      searchQuery: '',
-      categories: [],
-      loading: true,
-      error: null,
-    }
+    icon,
   },
 
   computed: {
-    // Enable categories Based on Order Number
     enabledCategories() {
-      return this.categories
-        .filter(category => category.enabled)
-        .sort((a, b) => a.order - b.order)
+      return this.$store.getters['categories/enabledCategories'];
+    },
+    loading() {
+      return this.$store.state.categories.loading;
+    },
+    error() {
+      return this.$store.state.categories.error;
     }
   },
 
   async created() {
-    await this.fetchCategories()
+    await this.$store.dispatch('categories/fetchCategories');
   },
 
   methods: {
     handleSearch(query) {
-      console.log('Searching for:', query)
+      console.log('Searching for:', query);
     },
-  }
-}
+  },
+};
 </script>
+
 
 <style lang="scss" scoped>
 @import '../scss/_variables.scss';
