@@ -1,5 +1,3 @@
-
-
 <template>
   <div class="home">
     <SearchContainer @search="handleSearch" />
@@ -7,10 +5,18 @@
       <div v-if="loading" class="loading">Loading categories...</div>
       <div v-else-if="error" class="error">{{ error }}</div>
       <div v-else class="categories">
-        <router-link 
-          v-for="category in enabledCategories" 
+        <router-link
+          v-for="category in enabledCategories"
           :key="category.id"
-          :to="{ name: 'CategoryArticles', params: { slug: category.id , title: category.title , svgIcon: category.icon , catUpdatedOn: timeConverter(category.updatedOn) } }"
+          :to="{ 
+            name: 'CategoryArticles', 
+            params: { 
+              slug: category.id, 
+              title: category.title, 
+              svgIcon: category.icon, 
+              catUpdatedOn: timeConverter(category.updatedOn) 
+            } 
+          }"
           class="category"
         >
           <icon :name="category.icon"></icon>
@@ -21,7 +27,6 @@
       </div>
     </div>
   </div>
-  
 </template>
 
 <script>
