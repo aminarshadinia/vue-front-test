@@ -1,5 +1,6 @@
 import Home from "./components/Home.vue";
 import CategoryArticles from "./components/CategoryArticles.vue";
+import NotFound from "./pages/NotFound.vue";
 import VueRouter from 'vue-router'
 
 export const routes = [
@@ -12,12 +13,17 @@ export const routes = [
     path: '/category/:slug',
     name: 'CategoryArticles',
     component: CategoryArticles,
-    props: true
+    props: route => ({
+      slug: route.params.slug,
+      title: route.params.title,
+      svgIcon: route.params.svgIcon,
+      catUpdatedOn: route.params.catUpdatedOn,
+    })
   },
   {
     path: '/:pathMatch(.*)*',
-    name: '404',
-    // component: () => import('./Views/404.vue')
+    name: 'NotFound',
+    component: NotFound
   },
 ]
 
