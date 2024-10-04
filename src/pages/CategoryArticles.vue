@@ -68,7 +68,21 @@ export default {
     }
   },
 
+  computed: {
+    publishedArticles() {
+      return this.articles.filter(article => article.status === "published");
+    }
+  },
+  async created() {
+    await this.fetchArticles(this.slug);
+  },
 
+  methods: {
+
+    handleSearch(query) {
+      console.log('Searching for:', query)
+    },
+  }
 }
 </script>
 
