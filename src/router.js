@@ -1,5 +1,5 @@
-import Home from "./components/Home.vue";
-import CategoryArticles from "./components/CategoryArticles.vue";
+import Home from "./pages/Home.vue";
+import CategoryArticles from "./pages/CategoryArticles.vue";
 import NotFound from "./pages/NotFound.vue";
 import VueRouter from 'vue-router'
 
