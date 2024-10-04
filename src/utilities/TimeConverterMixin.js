@@ -1,6 +1,6 @@
 
 
-var TimeConverterMixin = {
+var timeConverterMixin = {
     methods: {
         // We also could use MOMENT package.
         // The function takes a date string as input, creates a Date object for both the current time and the past time, and calculates the difference in seconds.
@@ -31,4 +31,4 @@ var TimeConverterMixin = {
 }
 
 
-export { TimeConverterMixin };
+export { timeConverterMixin };
