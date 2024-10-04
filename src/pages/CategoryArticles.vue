@@ -1,5 +1,6 @@
 <template>
 <div class="wrapper">
+    <SearchContainer @search="handleSearch" />
 
     <div v-if="loading" class="loading">Loading categories...</div>
     <div v-else-if="error" class="error">{{ error }}</div>
@@ -8,7 +9,7 @@
     <div class="breadcrumb">
       <router-link :to="{ name: 'Home' }" class="breadcrumb-link">All categories</router-link>
       <span class="breadcrumb-separator">&gt;</span>
-      <span class="breadcrumb-current"></span>
+      <span class="breadcrumb-current">{{ this.title }}</span>
     </div>
 
     <div class="content">
@@ -17,8 +18,8 @@
           <div class="svg-button">
             <icon :name="this.svgIcon"></icon>
           </div>
-            <p class="title"></p>
-            <p class="subtitle">Updated </p>
+            <p class="title">{{ this.title }}</p>
+            <p class="subtitle">Updated {{ this.catUpdatedOn }}</p>
             <div class="border"></div>
 
     <div class="info-icon">
@@ -31,16 +32,16 @@
   </div>
       </div>
       <div class="article-list">
-        <div  class="article-item">
+        <div v-for="article in publishedArticles" :key="article.id" class="article-item">
           <div class="article-icon">
             <ArticleIcon />
           </div>
           <div class="article-content">
             <h3>{{ article.title }}</h3>
-            <p>Updated </p>
+            <p>Updated {{ formattedDate(article.updatedOn) }}</p>
           </div>
           <div class="article-arrow">
-            
+            <ArrowIcon />
           </div>
         </div>
       </div>
@@ -60,6 +61,18 @@ import ArrowIcon from '../components/widgets/ArrowIcon.vue';
 export default {
   name: 'CategoryArticles',
 
+  mixins: [formattedDateMixin , fetchArticlesMixin],
+
+  props: ['slug', 'title', 'svgIcon', 'catUpdatedOn'],
+  
+    components: {
+      SearchContainer: () => import('../components/layout/SearchContainer.vue'),
+      icon,
+      InfoIcon,
+      ArticleIcon,
+      ArrowIcon,
+  
+},
   data() {
     return {
       articles: [],
@@ -161,7 +174,6 @@ export default {
         
 
         svg {
-          // flex-shrink: 0;
           width: 24px;
           height: 24px;
           stroke: $primary-color;
