@@ -53,7 +53,6 @@ export default {
     }
   },
 
-
   computed: {
     // Enable categories Based on Order Number
     enabledCategories() {
@@ -68,11 +67,9 @@ export default {
   },
 
   methods: {
-
     handleSearch(query) {
       console.log('Searching for:', query)
     },
-
   }
 }
 </script>
@@ -149,7 +146,6 @@ export default {
     color: $error-color;
   }
 }
-
 
 .category-title {
 font-size: 20px;

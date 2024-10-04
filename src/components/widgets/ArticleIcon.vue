@@ -3,9 +3,3 @@
 <polyline points="10 9 9 9 8 9"/>
 </svg>
 </template>
-
-<script>
-export default {
-  
-}
-</script>

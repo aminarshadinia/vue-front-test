@@ -65,14 +65,14 @@ export default {
 
   props: ['slug', 'title', 'svgIcon', 'catUpdatedOn'],
   
-    components: {
+  components: {
       SearchContainer: () => import('../components/layout/SearchContainer.vue'),
       icon,
       InfoIcon,
       ArticleIcon,
       ArrowIcon,
-  
-},
+  },
+    
   data() {
     return {
       articles: [],
@@ -91,7 +91,6 @@ export default {
   },
 
   methods: {
-
     handleSearch(query) {
       console.log('Searching for:', query)
     },
@@ -209,7 +208,6 @@ export default {
         &:hover {
           background-color: rgb(221, 221, 221);
         }
-        
 
         .article-icon {
           margin-right: 15px;
@@ -251,7 +249,6 @@ export default {
 .card {
   background-color: #ffffff;
   border-radius: 12px;
-  // box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border: 1px solid $border-color;
   padding: 20px;
   width: 240px;
@@ -277,7 +274,6 @@ export default {
 .border{
     border-bottom: 1px solid $border-color;
     margin-bottom: 10px;
-
 }
 
 .info-icon {
@@ -295,7 +291,6 @@ export default {
 .description {
   font-size: 14px;
   color: $text-gray;
-  line-height: 1.5;}
-
-
+  line-height: 1.5;
+}
 </style>
