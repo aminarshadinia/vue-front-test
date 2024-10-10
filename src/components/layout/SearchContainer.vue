@@ -3,7 +3,7 @@
     <h1>Knowledge base doesn't have to be boring</h1>
     <p>Everything you need to Manage your Messaging</p>
     <div class="search-container">
-      <input type="text" v-model="localSearchQuery" placeholder="Search for answers">
+      <input type="text" v-model="localSearchQuery" @keyup.enter="performSearch"   placeholder="Search for answers">
       <button @click="performSearch">
         <span class="sr-only">Search</span>
         <SearchIcon />
@@ -32,6 +32,9 @@ export default {
     performSearch() {
       this.$emit('search', this.localSearchQuery)
       console.log(this.localSearchQuery)
+      if (this.localSearchQuery.trim()) {
+        this.$router.push({ path: `/search/` , query: {q: this.localSearchQuery}})
+      }
     }
   }
 }
